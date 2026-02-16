@@ -2,7 +2,6 @@ import * as React from "react";
 import "./InputCode.css";
 
 const LENGTH = 6;
-const PLACEHOLDER = "–";
 
 function normalizeValue(s: string): string {
   return s.replace(/\D/g, "").slice(0, LENGTH);
@@ -43,7 +42,13 @@ export const InputCode = React.forwardRef<HTMLDivElement, InputCodeProps>(
     const value = valueProp !== undefined ? normalizeValue(valueProp) : internalValue;
     const digits = value.split("");
     while (digits.length < LENGTH) digits.push("");
+
     const inputRefs = React.useRef<(HTMLInputElement | null)[]>([]);
+    for (let i = 0; i < LENGTH; i++) {
+      if (!inputRefs.current[i]) {
+        inputRefs.current[i] = null;
+      }
+    }
 
     const setValue = React.useCallback(
       (next: string) => {
@@ -55,57 +60,120 @@ export const InputCode = React.forwardRef<HTMLDivElement, InputCodeProps>(
       [valueProp, onChange, onComplete]
     );
 
-    const handleChange = React.useCallback(
-      (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-        const raw = e.target.value;
-        if (raw.length > 1) {
-          const pasted = normalizeValue(raw);
-          const combined =
-            value.slice(0, index) + pasted + value.slice(index + pasted.length);
-          setValue(normalizeValue(combined));
-          const nextIndex = Math.min(index + pasted.length, LENGTH - 1);
-          setTimeout(() => inputRefs.current[nextIndex]?.focus(), 0);
-          return;
+    React.useEffect(() => {
+      if (value.length === LENGTH && onComplete) {
+        onComplete(value);
+      }
+    }, [value, onComplete]);
+
+    React.useEffect(() => {
+      inputRefs.current.forEach((ref, index) => {
+        if (ref) {
+          ref.value = digits[index] || "";
         }
-        const char = raw.replace(/\D/g, "");
-        const next =
-          value.slice(0, index) + char + value.slice(index + 1);
-        setValue(next);
-        if (char) setTimeout(() => inputRefs.current[index + 1]?.focus(), 0);
+      });
+    }, [value, digits]);
+
+    const handleInput = React.useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+        const input = e.target;
+        const previousInput = inputRefs.current[index - 1];
+        const nextInput = inputRefs.current[index + 1];
+
+        const newCode = [...digits];
+        const char = normalizeValue(input.value);
+        
+        if (char) {
+          newCode[index] = char;
+          setValue(newCode.join(""));
+          input.select();
+          
+          if (nextInput) {
+            nextInput.focus();
+            nextInput.select();
+          }
+        } else {
+          newCode[index] = "";
+          setValue(newCode.join(""));
+          
+          if (previousInput) {
+            previousInput.focus();
+            previousInput.select();
+          }
+        }
       },
-      [value, setValue]
+      [digits, setValue]
+    );
+
+    const handleFocus = React.useCallback(
+      (e: React.FocusEvent<HTMLInputElement>) => {
+        e.target.select();
+      },
+      []
     );
 
     const handleKeyDown = React.useCallback(
-      (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Backspace" && !value[index] && index > 0) {
+      (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+        const input = e.target as HTMLInputElement;
+        const previousInput = inputRefs.current[index - 1];
+
+        if ((e.key === "Backspace" || e.key === "Delete") && !input.value && index > 0) {
           e.preventDefault();
-          const next = value.slice(0, index - 1) + value.slice(index);
-          setValue(next);
-          setTimeout(() => inputRefs.current[index - 1]?.focus(), 0);
+          const newCode = [...digits];
+          newCode[index - 1] = "";
+          setValue(newCode.join(""));
+          if (previousInput) {
+            previousInput.focus();
+            previousInput.select();
+          }
         }
       },
-      [value, setValue]
+      [digits, setValue]
     );
 
     const handlePaste = React.useCallback(
-      (e: React.ClipboardEvent) => {
+      (e: React.ClipboardEvent<HTMLInputElement>) => {
         e.preventDefault();
-        const pasted = normalizeValue(e.clipboardData.getData("text"));
-        if (pasted.length > 0) {
-          setValue(pasted);
-          const nextIndex = Math.min(pasted.length, LENGTH) - 1;
-          setTimeout(() => inputRefs.current[nextIndex]?.focus(), 0);
+        const pastedCode = normalizeValue(e.clipboardData.getData("text"));
+        if (pastedCode.length === LENGTH) {
+          setValue(pastedCode);
+          inputRefs.current.forEach((inputRef, index) => {
+            if (inputRef) {
+              inputRef.value = pastedCode[index] || "";
+            }
+          });
+          const lastInput = inputRefs.current[LENGTH - 1];
+          if (lastInput) {
+            lastInput.focus();
+            lastInput.select();
+          }
+        } else if (pastedCode.length > 0) {
+          const activeIndex = inputRefs.current.findIndex(
+            (ref) => ref === document.activeElement
+          );
+          if (activeIndex >= 0) {
+            const newCode = [...digits];
+            for (let i = 0; i < pastedCode.length && activeIndex + i < LENGTH; i++) {
+              newCode[activeIndex + i] = pastedCode[i];
+            }
+            setValue(newCode.join(""));
+            const nextIndex = Math.min(activeIndex + pastedCode.length, LENGTH - 1);
+            const nextInput = inputRefs.current[nextIndex];
+            if (nextInput) {
+              nextInput.focus();
+              nextInput.select();
+            }
+          }
         }
       },
-      [setValue]
+      [digits, setValue]
     );
 
     return (
       <div
         ref={ref}
         id={rootId}
-        className={["astrum-input-code", className].filter(Boolean).join(" ")}
+        className={`astrum-input-code ${error ? "astrum-input-code--error" : ""} ${className}`.trim()}
       >
         <div className="astrum-input-code__wrap">
           {digits.map((digit, index) => (
@@ -119,11 +187,11 @@ export const InputCode = React.forwardRef<HTMLDivElement, InputCodeProps>(
               inputMode="numeric"
               autoComplete={index === 0 ? "one-time-code" : "off"}
               maxLength={1}
-              className="astrum-input-code__cell"
+              className={`astrum-input-code__cell ${index === 3 ? "astrum-input-code__cell--spaced" : ""}`.trim()}
               value={digit}
-              placeholder={PLACEHOLDER}
-              onChange={(e) => handleChange(index, e)}
-              onKeyDown={(e) => handleKeyDown(index, e)}
+              onChange={(e) => handleInput(e, index)}
+              onFocus={handleFocus}
+              onKeyDown={(e) => handleKeyDown(e, index)}
               onPaste={handlePaste}
               disabled={disabled}
               aria-invalid={!!error}

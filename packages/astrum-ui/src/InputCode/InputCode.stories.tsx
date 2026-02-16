@@ -34,7 +34,13 @@ export const Required: Story = {
 
 export const WithError: Story = {
   args: {
-    error: "Неверный код",
+    error: "Поле обязательно для заполнения",
+  },
+};
+
+export const PartiallyFilled: Story = {
+  args: {
+    defaultValue: "214",
   },
 };
 

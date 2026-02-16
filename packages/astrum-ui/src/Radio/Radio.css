@@ -26,8 +26,8 @@
 
 .astrum-radio__circle {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: 2px solid var(--astrum-gray-20);
   background-color: transparent;
@@ -48,7 +48,7 @@
   transition: transform 0.15s ease;
 }
 
-.astrum-radio:not(:disabled):hover .astrum-radio__circle {
+.astrum-radio:hover:not(:has(.astrum-radio__input:disabled)) .astrum-radio__circle {
   border-color: var(--astrum-gray-40);
 }
 
@@ -61,58 +61,34 @@
   transform: scale(1);
 }
 
-.astrum-radio:not(:disabled):hover
+.astrum-radio:hover:not(:has(.astrum-radio__input:disabled))
   .astrum-radio__input:checked
   + .astrum-radio__circle {
   border-color: var(--astrum-hover-blue);
 }
 
-.astrum-radio:not(:disabled):hover
+.astrum-radio:hover:not(:has(.astrum-radio__input:disabled))
   .astrum-radio__input:checked
   + .astrum-radio__circle::after {
   background-color: var(--astrum-hover-blue);
 }
 
 .astrum-radio__input:disabled + .astrum-radio__circle {
-  border-color: var(--astrum-gray-5);
+  border-color: var(--astrum-primary);
   cursor: not-allowed;
 }
 
 .astrum-radio__input:disabled:checked + .astrum-radio__circle {
-  border-color: var(--astrum-gray-20);
+  border-color: var(--astrum-primary);
 }
 
 .astrum-radio__input:disabled:checked + .astrum-radio__circle::after {
-  background-color: var(--astrum-gray-40);
-}
-
-.astrum-radio__input:disabled ~ .astrum-radio__label {
-  color: var(--astrum-gray-40);
-  cursor: not-allowed;
+  background-color: var(--astrum-primary);
 }
 
 .astrum-radio:has(.astrum-radio__input:disabled) {
   cursor: not-allowed;
-}
-
-.astrum-radio__label {
-  font-size: 15px;
-  line-height: 1.4;
-  color: inherit;
-}
-
-.astrum-radio--s .astrum-radio__circle {
-  width: 16px;
-  height: 16px;
-  border-width: 1.5px;
-}
-
-.astrum-radio--s .astrum-radio__circle::after {
-  inset: 3px;
-}
-
-.astrum-radio--s .astrum-radio__label {
-  font-size: 14px;
+  opacity: 0.4;
 }
 
 .astrum-radio-group {

@@ -1,63 +1,98 @@
 .astrum-input-code {
-  --astrum-primary: #2653f2;
-  --astrum-gray-20: #d5d5d5;
-  --astrum-gray-40: #ababab;
-  --astrum-gray-80: #575757;
-  --astrum-gray-5: #f4f4f4;
-  --astrum-error: #ea3b3d;
+  --astrum-input-code-primary: #2653F2;
+  --astrum-input-code-border: #D5D5D5;
+  --astrum-input-code-text: #575757;
+  --astrum-input-code-placeholder: #ABABAB;
+  --astrum-input-code-error: #EA3B3D;
+  --astrum-input-code-error-bg: #FEE8E8;
+  --astrum-input-code-bg: #FFFFFF;
 
   display: inline-flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0;
   min-width: 0;
 }
 
 .astrum-input-code__wrap {
+  box-sizing: border-box;
+  position: relative;
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 301px;
+  padding: 16px 24px;
+  border: 1px solid var(--astrum-input-code-border);
+  border-radius: 8px;
+  background: var(--astrum-input-code-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.astrum-input-code__wrap:focus-within {
+  border-color: var(--astrum-input-code-primary);
+  box-shadow: 0 0 0 2px rgba(38, 83, 242, 0.1);
+}
+
+.astrum-input-code--error .astrum-input-code__wrap {
+  border-color: var(--astrum-input-code-error);
 }
 
 .astrum-input-code__cell {
-  width: 40px;
-  height: 40px;
+  width: 18px;
+  height: 36px;
   padding: 0;
-  border: 1px solid var(--astrum-gray-20);
-  border-radius: 8px;
-  background-color: #ffffff;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--astrum-gray-80);
+  margin: 0;
+  border: none;
+  border-bottom: 2px solid var(--astrum-input-code-placeholder);
+  border-radius: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--astrum-input-code-text);
   text-align: center;
-  transition: border-color 0.15s, box-shadow 0.15s;
-  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s, color 0.2s;
 }
 
 .astrum-input-code__cell::placeholder {
-  color: var(--astrum-gray-40);
+  color: transparent;
 }
 
-.astrum-input-code__cell:disabled,
-.astrum-input-code__wrap:has(.astrum-input-code__cell:disabled) .astrum-input-code__cell {
+.astrum-input-code__cell:focus {
+  border-bottom-color: var(--astrum-input-code-primary);
+  color: var(--astrum-input-code-primary);
+}
+
+.astrum-input-code__cell--spaced {
+  margin-left: 10px;
+}
+
+.astrum-input-code__cell:disabled {
   cursor: not-allowed;
-  background-color: var(--astrum-gray-5);
-  border-color: var(--astrum-gray-20);
-  border-style: dashed;
-  color: var(--astrum-gray-40);
+  opacity: 0.4;
 }
 
-.astrum-input-code__cell:disabled::placeholder {
-  color: var(--astrum-gray-40);
+.astrum-input-code__wrap:has(.astrum-input-code__cell:disabled) {
+  background-color: #F4F4F4;
+  border-style: dashed;
+  cursor: not-allowed;
 }
 
 .astrum-input-code__footer {
-  min-height: 18px;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: var(--astrum-input-code-error-bg);
 }
 
 .astrum-input-code__error {
-  font-size: 12px;
+  display: block;
   font-weight: 500;
-  line-height: 100%;
-  color: var(--astrum-error);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--astrum-input-code-error);
 }

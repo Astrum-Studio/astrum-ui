@@ -1,125 +1,230 @@
 .astrum-input {
-  --astrum-primary: #2653f2;
-  --astrum-gray-20: #d5d5d5;
-  --astrum-gray-40: #ababab;
-  --astrum-gray-80: #575757;
-  --astrum-gray-5: #f4f4f4;
-  --astrum-error: #ea3b3d;
+  --astrum-input-primary: #2653F2;
+  --astrum-input-border: #D5D5D5;
+  --astrum-input-border-hover: #ABABAB;
+  --astrum-input-placeholder: #ABABAB;
+  --astrum-input-placeholder-focus: #D5D5D5;
+  --astrum-input-text: #575757;
+  --astrum-input-error: #EA3B3D;
+  --astrum-input-bg: #FFFFFF;
 
   display: inline-flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0;
   min-width: 0;
-}
-
-.astrum-input__label {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--astrum-gray-80);
-  cursor: pointer;
-}
-
-.astrum-input__required {
-  color: var(--astrum-primary);
-  margin-left: 2px;
 }
 
 .astrum-input__wrap {
+  position: relative;
   display: flex;
   align-items: center;
-  border: 1px solid var(--astrum-gray-20);
-  border-radius: 8px;
-  background-color: #ffffff;
-  transition: border-color 0.15s, outline 0.15s;
+  background: var(--astrum-input-bg);
+  border: 1px solid var(--astrum-input-border);
+  border-radius: 4px;
+}
+
+@media (hover: hover) {
+  .astrum-input__wrap:hover:not(:has(.astrum-input__field:disabled)) {
+    border-color: var(--astrum-input-border-hover);
+  }
+}
+
+.astrum-input__wrap:focus-within {
+  outline: 1px solid var(--astrum-input-primary);
+  outline-offset: -1px;
+  border-color: var(--astrum-input-primary);
 }
 
 .astrum-input--error .astrum-input__wrap {
-  border-color: var(--astrum-error);
+  border-color: var(--astrum-input-error);
 }
 
 .astrum-input--error .astrum-input__wrap:focus-within {
-  border-color: var(--astrum-error);
-  outline: 1px solid var(--astrum-error);
-  outline-offset: -1px;
+  outline-color: var(--astrum-input-error);
+  border-color: var(--astrum-input-error);
+}
+
+.astrum-input__label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 120%;
+  color: var(--astrum-input-text);
+  cursor: pointer;
+}
+
+.astrum-input--s .astrum-input__label {
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.astrum-input__required-icon {
+  display: flex;
+  width: 7px;
+  height: 6px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.astrum-input--s .astrum-input__required-icon {
+  top: 6px;
+  right: 6px;
+}
+
+.astrum-input__wrap--search .astrum-input__field {
+  padding-right: 36px;
+}
+
+.astrum-input--s .astrum-input__wrap--search .astrum-input__field {
+  padding-right: 32px;
+}
+
+.astrum-input__wrap--password .astrum-input__field {
+  padding-right: 36px;
+}
+
+.astrum-input--s .astrum-input__wrap--password .astrum-input__field {
+  padding-right: 32px;
+}
+
+.astrum-input__search-icon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: var(--astrum-input-placeholder);
+  cursor: pointer;
+}
+
+.astrum-input--s .astrum-input__search-icon {
+  right: 8px;
+}
+
+.astrum-input--s .astrum-input__search-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.astrum-input__clear-icon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: var(--astrum-input-placeholder);
+  cursor: pointer;
+}
+
+.astrum-input--s .astrum-input__clear-icon {
+  right: 6px;
+}
+
+.astrum-input--s .astrum-input__clear-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.astrum-input__password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: var(--astrum-input-border-hover);
+  cursor: pointer;
+}
+
+.astrum-input--s .astrum-input__password-toggle {
+  right: 6px;
+}
+
+.astrum-input--s .astrum-input__password-toggle svg {
+  width: 24px;
+  height: 24px;
 }
 
 .astrum-input__field {
+  box-sizing: border-box;
   flex: 1;
   min-width: 0;
   width: 100%;
-  padding: 10px 12px;
+  height: 54px;
+  padding: 16px 8px 16px 24px;
   border: none;
   border-radius: 8px;
   background: transparent;
   font-family: inherit;
+  font-weight: 500;
   font-size: 16px;
-  font-weight: 400;
   line-height: 1.5;
-  color: var(--astrum-gray-80);
+  color: var(--astrum-input-text);
+}
+
+.astrum-input__field[type="search"]::-webkit-search-cancel-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.astrum-input--s .astrum-input__field {
+  height: 43px;
+  padding: 12px 8px 12px 20px;
+  font-size: 14px;
 }
 
 .astrum-input__field::placeholder {
-  color: var(--astrum-gray-40);
+  color: var(--astrum-input-placeholder);
 }
 
-.astrum-input__suffix {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-right: 12px;
-  color: var(--astrum-gray-40);
-  flex-shrink: 0;
+.astrum-input__field:focus::placeholder {
+  color: var(--astrum-input-placeholder-focus);
 }
 
-.astrum-input__field:disabled,
-.astrum-input__wrap:has(.astrum-input__field:disabled) {
+.astrum-input__field:focus-visible {
+  border-color: transparent;
+  outline: 1px solid transparent;
+}
+
+.astrum-input__field:disabled {
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .astrum-input__wrap:has(.astrum-input__field:disabled) {
-  background-color: var(--astrum-gray-5);
-  border-color: var(--astrum-gray-20);
-  border-style: dashed;
-}
-
-.astrum-input__field:disabled {
-  color: var(--astrum-gray-40);
-}
-
-.astrum-input__field:disabled::placeholder {
-  color: var(--astrum-gray-40);
-}
-
-.astrum-input__footer {
-  min-height: 18px;
+  cursor: not-allowed;
+  border-style: dotted;
 }
 
 .astrum-input__error {
-  font-size: 12px;
+  display: block;
+  margin-top: 8px;
   font-weight: 500;
-  line-height: 100%;
-  color: var(--astrum-error);
-}
-
-.astrum-input--s .astrum-input__label {
   font-size: 12px;
+  line-height: 1.4;
+  color: var(--astrum-input-error);
 }
 
-.astrum-input--s .astrum-input__field {
-  padding: 8px 10px;
-  font-size: 14px;
-}
-
-.astrum-input--s .astrum-input__suffix {
-  padding-right: 10px;
-}
-
-.astrum-input--l .astrum-input__field {
-  padding: 12px 16px;
-  font-size: 18px;
-}
-
-.astrum-input--l .astrum-input__suffix {
-  padding-right: 16px;
+.astrum-input--s .astrum-input__error {
+  margin-top: 6px;
+  font-size: 11px;
 }

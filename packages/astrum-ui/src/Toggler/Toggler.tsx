@@ -1,32 +1,52 @@
 import * as React from "react";
 
-export interface TogglerProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
-  label?: React.ReactNode;
-  size?: "s" | "m";
+export interface TogglerProps {
+  checked?: boolean;
+  disabled?: boolean;
+  onChange?: (checked: boolean) => void;
+  className?: string;
 }
 
 export const Toggler = React.forwardRef<HTMLInputElement, TogglerProps>(
-  ({ label, size = "m", className = "", id: idProp, ...rest }, ref) => {
-    const id = React.useId();
-    const inputId = idProp ?? id;
+  ({ checked: checkedProp, disabled = false, onChange, className = "" }, ref) => {
+    const [internalChecked, setInternalChecked] = React.useState(false);
+    const isControlled = checkedProp !== undefined;
+    const checked = isControlled ? checkedProp : internalChecked;
+
+    const handleChange = React.useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!disabled) {
+          if (!isControlled) {
+            setInternalChecked(e.target.checked);
+          }
+          onChange?.(e.target.checked);
+        }
+      },
+      [disabled, onChange, isControlled]
+    );
+
+    const classes = [
+      "astrum-toggler",
+      checked && "astrum-toggler--checked",
+      disabled && "astrum-toggler--disabled",
+      className,
+    ]
+      .filter(Boolean)
+      .join(" ");
 
     return (
-      <label
-        htmlFor={inputId}
-        className={`astrum-toggler ${size === "s" ? "astrum-toggler--s" : "astrum-toggler--m"} ${className}`.trim()}
-      >
+      <label className={classes}>
         <input
           ref={ref}
           type="checkbox"
-          id={inputId}
-          role="switch"
+          checked={isControlled ? checked : undefined}
+          onChange={handleChange}
+          disabled={disabled}
           className="astrum-toggler__input"
-          {...rest}
         />
-        <span className="astrum-toggler__track" aria-hidden>
-          <span className="astrum-toggler__knob" />
+        <span className="astrum-toggler__track">
+          <span className="astrum-toggler__thumb"></span>
         </span>
-        {label != null && <span className="astrum-toggler__label">{label}</span>}
       </label>
     );
   }

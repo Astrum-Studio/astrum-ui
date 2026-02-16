@@ -2,19 +2,17 @@ import * as React from "react";
 
 export interface RadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
   value: string;
-  label?: React.ReactNode;
-  size?: "s" | "m";
 }
 
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
-  ({ value, label, size = "m", className = "", id: idProp, ...rest }, ref) => {
+  ({ value, className = "", id: idProp, ...rest }, ref) => {
     const id = React.useId();
     const inputId = idProp ?? id;
 
     return (
       <label
         htmlFor={inputId}
-        className={`astrum-radio ${size === "s" ? "astrum-radio--s" : "astrum-radio--m"} ${className}`.trim()}
+        className={`astrum-radio ${className}`.trim()}
       >
         <input
           ref={ref}
@@ -25,7 +23,6 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
           {...rest}
         />
         <span className="astrum-radio__circle" aria-hidden />
-        {label != null && <span className="astrum-radio__label">{label}</span>}
       </label>
     );
   }
