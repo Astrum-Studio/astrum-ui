@@ -1,0 +1,63 @@
+.astrum-input-code {
+  --astrum-primary: #2653f2;
+  --astrum-gray-20: #d5d5d5;
+  --astrum-gray-40: #ababab;
+  --astrum-gray-80: #575757;
+  --astrum-gray-5: #f4f4f4;
+  --astrum-error: #ea3b3d;
+
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.astrum-input-code__wrap {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.astrum-input-code__cell {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--astrum-gray-20);
+  border-radius: 8px;
+  background-color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--astrum-gray-80);
+  text-align: center;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+}
+
+.astrum-input-code__cell::placeholder {
+  color: var(--astrum-gray-40);
+}
+
+.astrum-input-code__cell:disabled,
+.astrum-input-code__wrap:has(.astrum-input-code__cell:disabled) .astrum-input-code__cell {
+  cursor: not-allowed;
+  background-color: var(--astrum-gray-5);
+  border-color: var(--astrum-gray-20);
+  border-style: dashed;
+  color: var(--astrum-gray-40);
+}
+
+.astrum-input-code__cell:disabled::placeholder {
+  color: var(--astrum-gray-40);
+}
+
+.astrum-input-code__footer {
+  min-height: 18px;
+}
+
+.astrum-input-code__error {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 100%;
+  color: var(--astrum-error);
+}

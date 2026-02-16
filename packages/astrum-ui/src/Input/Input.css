@@ -1,0 +1,125 @@
+.astrum-input {
+  --astrum-primary: #2653f2;
+  --astrum-gray-20: #d5d5d5;
+  --astrum-gray-40: #ababab;
+  --astrum-gray-80: #575757;
+  --astrum-gray-5: #f4f4f4;
+  --astrum-error: #ea3b3d;
+
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.astrum-input__label {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--astrum-gray-80);
+  cursor: pointer;
+}
+
+.astrum-input__required {
+  color: var(--astrum-primary);
+  margin-left: 2px;
+}
+
+.astrum-input__wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--astrum-gray-20);
+  border-radius: 8px;
+  background-color: #ffffff;
+  transition: border-color 0.15s, outline 0.15s;
+}
+
+.astrum-input--error .astrum-input__wrap {
+  border-color: var(--astrum-error);
+}
+
+.astrum-input--error .astrum-input__wrap:focus-within {
+  border-color: var(--astrum-error);
+  outline: 1px solid var(--astrum-error);
+  outline-offset: -1px;
+}
+
+.astrum-input__field {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--astrum-gray-80);
+}
+
+.astrum-input__field::placeholder {
+  color: var(--astrum-gray-40);
+}
+
+.astrum-input__suffix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 12px;
+  color: var(--astrum-gray-40);
+  flex-shrink: 0;
+}
+
+.astrum-input__field:disabled,
+.astrum-input__wrap:has(.astrum-input__field:disabled) {
+  cursor: not-allowed;
+}
+
+.astrum-input__wrap:has(.astrum-input__field:disabled) {
+  background-color: var(--astrum-gray-5);
+  border-color: var(--astrum-gray-20);
+  border-style: dashed;
+}
+
+.astrum-input__field:disabled {
+  color: var(--astrum-gray-40);
+}
+
+.astrum-input__field:disabled::placeholder {
+  color: var(--astrum-gray-40);
+}
+
+.astrum-input__footer {
+  min-height: 18px;
+}
+
+.astrum-input__error {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 100%;
+  color: var(--astrum-error);
+}
+
+.astrum-input--s .astrum-input__label {
+  font-size: 12px;
+}
+
+.astrum-input--s .astrum-input__field {
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.astrum-input--s .astrum-input__suffix {
+  padding-right: 10px;
+}
+
+.astrum-input--l .astrum-input__field {
+  padding: 12px 16px;
+  font-size: 18px;
+}
+
+.astrum-input--l .astrum-input__suffix {
+  padding-right: 16px;
+}

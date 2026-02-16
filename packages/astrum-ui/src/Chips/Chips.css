@@ -1,0 +1,63 @@
+.astrum-chips {
+  --astrum-chips-default-bg: #f4f4f4;
+  --astrum-chips-default-text: #818181;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  background-color: var(--astrum-chips-default-bg);
+  color: var(--astrum-chips-default-text);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.astrum-chips:hover:not(:disabled) {
+  background-color: var(--astrum-chips-default-text);
+  color: #fff;
+}
+
+.astrum-chips:disabled {
+  opacity: 0.4;
+  background-color: var(--astrum-chips-default-bg);
+  color: var(--astrum-chips-default-text);
+  cursor: not-allowed;
+}
+
+.astrum-chips__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.astrum-chips__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  margin-left: -2px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.15s;
+  flex-shrink: 0;
+}
+
+.astrum-chips:disabled .astrum-chips__remove {
+  cursor: not-allowed;
+}
+
+.astrum-chips--m {
+  padding: 6px 12px;
+  font-size: 14px;
+  gap: 6px;
+}

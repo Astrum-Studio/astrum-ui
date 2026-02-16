@@ -1,0 +1,112 @@
+.astrum-checkbox {
+  --astrum-primary: #2653f2;
+  --astrum-primary-white: #ffffff;
+  --astrum-hover-blue: #0431d0;
+  --astrum-gray-20: #d5d5d5;
+  --astrum-gray-40: #ababab;
+  --astrum-gray-5: #f4f4f4;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.astrum-checkbox__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.astrum-checkbox__box {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  border: 1px solid var(--astrum-gray-20);
+  background-color: var(--astrum-primary-white);
+  transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+  color: var(--astrum-primary-white);
+}
+
+.astrum-checkbox__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.astrum-checkbox__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.astrum-checkbox:not(.astrum-checkbox--checked):not(.astrum-checkbox--indeterminate) .astrum-checkbox__box {
+  background-color: var(--astrum-primary-white);
+  border-color: var(--astrum-gray-20);
+}
+
+@media (hover: hover) {
+  .astrum-checkbox:not(.astrum-checkbox--disabled):hover:not(.astrum-checkbox--checked):not(.astrum-checkbox--indeterminate) .astrum-checkbox__box {
+    border-color: var(--astrum-primary);
+  }
+}
+
+.astrum-checkbox--checked .astrum-checkbox__box,
+.astrum-checkbox--indeterminate .astrum-checkbox__box {
+  border-color: transparent;
+  border-width: 1px;
+  background-color: var(--astrum-primary);
+}
+
+@media (hover: hover) {
+  .astrum-checkbox:not(.astrum-checkbox--disabled):hover.astrum-checkbox--checked .astrum-checkbox__box,
+  .astrum-checkbox:not(.astrum-checkbox--disabled):hover.astrum-checkbox--indeterminate .astrum-checkbox__box {
+    background-color: var(--astrum-hover-blue);
+  }
+}
+
+.astrum-checkbox--disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.astrum-checkbox--disabled .astrum-checkbox__box {
+  cursor: not-allowed;
+}
+
+.astrum-checkbox:not(.astrum-checkbox--checked):not(.astrum-checkbox--indeterminate).astrum-checkbox--disabled .astrum-checkbox__box {
+  border-color: var(--astrum-gray-5);
+  background-color: var(--astrum-primary-white);
+}
+
+.astrum-checkbox--s .astrum-checkbox__box {
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.astrum-checkbox--s .astrum-checkbox__icon {
+  width: 10px;
+  height: 10px;
+}
+
+.astrum-checkbox--s .astrum-checkbox__icon svg {
+  transform: scale(0.85);
+}
+
+.astrum-checkbox--m .astrum-checkbox__box {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  padding: 4px;
+  box-sizing: border-box;
+}

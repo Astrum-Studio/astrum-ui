@@ -1,0 +1,50 @@
+.astrum-color-swatch-picker {
+  --astrum-primary-white: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.astrum-color-swatch-picker__swatch {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: var(--astrum-swatch-color);
+  box-shadow: none;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.astrum-color-swatch-picker__swatch:hover:not(:disabled)[data-hovered],
+.astrum-color-swatch-picker__swatch[data-selected] {
+  box-shadow:
+    inset 0 0 0 2px var(--astrum-primary-white),
+    0 0 0 2px var(--astrum-swatch-color);
+}
+
+.astrum-color-swatch-picker__swatch[data-selected] .astrum-color-swatch-picker__check {
+  opacity: 1;
+}
+
+.astrum-color-swatch-picker__check {
+  color: var(--astrum-primary-white);
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s ease;
+}
+
+.astrum-color-swatch-picker__swatch:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

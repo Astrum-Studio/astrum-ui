@@ -1,0 +1,170 @@
+.astrum-btn {
+  --astrum-primary: #2653f2;
+  --astrum-primary-white: #ffffff;
+  --astrum-hover-blue: #0431d0;
+  --astrum-gray-80: #575757;
+  --astrum-gray-60: #818181;
+  --astrum-gray-40: #ababab;
+  --astrum-gray-20: #d5d5d5;
+  --astrum-gray-5: #f4f4f4;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all ease-in-out 0.15s;
+}
+
+.astrum-btn:disabled {
+  cursor: not-allowed;
+}
+
+.astrum-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.astrum-btn-s {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.astrum-btn-m {
+  padding: 10px 20px;
+  font-size: 15px;
+}
+
+.astrum-btn-l {
+  padding: 12px 24px;
+  font-size: 18px;
+}
+
+.astrum-btn-icon-only.astrum-btn-s {
+  padding: 8px;
+}
+
+.astrum-btn-icon-only.astrum-btn-m {
+  padding: 10px;
+}
+
+.astrum-btn-icon-only.astrum-btn-l {
+  padding: 12px;
+}
+
+.astrum-btn-shape-square {
+  border-radius: 8px;
+}
+
+.astrum-btn-shape-circle {
+  border-radius: 50%;
+}
+
+.astrum-btn-primary {
+  background-color: var(--astrum-primary);
+  color: var(--astrum-primary-white);
+}
+
+.astrum-btn-primary:hover:not(:disabled) {
+  background-color: var(--astrum-hover-blue);
+  color: var(--astrum-primary-white);
+}
+
+.astrum-btn-primary:disabled {
+  background-color: var(--astrum-gray-20);
+  color: var(--astrum-gray-60);
+}
+
+.astrum-btn-outlined {
+  background-color: transparent;
+  color: var(--astrum-primary-white);
+  border: 1px solid var(--astrum-primary-white);
+}
+
+.astrum-btn-outlined:hover:not(:disabled) {
+  background-color: var(--astrum-primary-white);
+  border-color: var(--astrum-primary-white);
+  color: var(--astrum-hover-blue);
+}
+
+.astrum-btn-outlined:disabled {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--astrum-primary-white);
+  opacity: 0.4;
+}
+
+.astrum-btn-dashed {
+  background-color: transparent;
+  color: var(--astrum-gray-80);
+  border: 1px dashed var(--astrum-gray-60);
+}
+
+.astrum-btn-dashed:hover:not(:disabled) {
+  background-color: transparent;
+  border-color: var(--astrum-gray-80);
+  color: var(--astrum-gray-80);
+}
+
+.astrum-btn-dashed:disabled {
+  background-color: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+.astrum-btn-grey {
+  background-color: var(--astrum-gray-5);
+  outline: 2px solid transparent;
+  color: var(--astrum-primary);
+}
+
+.astrum-btn-grey:hover:not(:disabled) {
+  outline-width: 2px;
+  outline-color: var(--astrum-primary);
+  background-color: var(--astrum-gray-5);
+  color: var(--astrum-primary);
+}
+
+.astrum-btn-grey:disabled {
+  background-color: var(--astrum-gray-20);
+  color: var(--astrum-gray-60);
+}
+
+.astrum-btn-white {
+  background-color: var(--astrum-primary-white);
+  outline: 2px solid transparent;
+  color: var(--astrum-primary);
+}
+
+.astrum-btn-white:hover:not(:disabled) {
+  outline-width: 2px;
+  outline-color: var(--astrum-primary);
+  background-color: var(--astrum-primary-white);
+  color: var(--astrum-primary);
+}
+
+.astrum-btn-white:disabled {
+  background-color: var(--astrum-gray-20);
+  color: var(--astrum-gray-60);
+}
+
+.astrum-btn-ghost {
+  background-color: transparent;
+  color: var(--astrum-gray-80);
+}
+
+.astrum-btn-ghost:hover:not(:disabled) {
+  background-color: transparent;
+  color: var(--astrum-primary);
+}
+
+.astrum-btn-ghost:disabled {
+  background-color: transparent;
+  color: var(--astrum-gray-40);
+}

@@ -1,0 +1,85 @@
+.astrum-list-item {
+  --astrum-primary: #2653f2;
+  --astrum-gray-3: #f8f8f8;
+  --astrum-gray-5: #f4f4f4;
+  --astrum-gray-40: #ababab;
+  --astrum-gray-60: #818181;
+  --astrum-gray-80: #575757;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--astrum-gray-3);
+  cursor: pointer;
+  transition: background-color 0.15s, box-shadow 0.15s;
+  text-align: left;
+  font-family: "Involve", sans-serif;
+}
+
+.astrum-list-item:hover:not(:disabled) {
+  background-color: var(--astrum-gray-5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.astrum-list-item:hover:not(:disabled) .astrum-list-item__chevron {
+  color: var(--astrum-primary);
+}
+
+.astrum-list-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.astrum-list-item__avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--astrum-gray-60);
+  overflow: hidden;
+}
+
+.astrum-list-item__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.astrum-list-item__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.astrum-list-item__title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--astrum-gray-80);
+}
+
+.astrum-list-item__subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--astrum-gray-60);
+}
+
+.astrum-list-item__chevron {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--astrum-gray-40);
+  transition: color 0.15s;
+}
