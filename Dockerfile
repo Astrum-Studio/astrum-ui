@@ -11,6 +11,10 @@ COPY . .
 
 WORKDIR /app/packages/astrum-ui
 
+RUN npm run storybook:build
+
+RUN npm install -g serve
+
 EXPOSE 3333
 
-CMD ["npm", "run", "storybook"]
+CMD ["serve", "-s", "storybook-static", "-l", "0.0.0.0:3333"]

@@ -20,7 +20,7 @@
   "scripts": {
     "build": "tsup && copyfiles \"src/**/*.css\" dist -u 1",
     "clean": "rimraf dist",
-    "storybook": "npx storybook dev -p 3333 --host 0.0.0.0",
+    "storybook": "npx storybook dev -p 6006",
     "storybook:build": "npx storybook build -o storybook-static"
   },
   "peerDependencies": {

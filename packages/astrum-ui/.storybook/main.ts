@@ -6,6 +6,13 @@ const config: StorybookConfig = {
   framework: getAbsolutePath("@storybook/react-vite"),
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [getAbsolutePath("@storybook/addon-links"), getAbsolutePath("@storybook/addon-docs")],
+  staticDirs: ["./"],
+  viteFinal: async (config) => {
+    if (config.base) {
+      config.base = undefined;
+    }
+    return config;
+  },
 };
 
 export default config;
