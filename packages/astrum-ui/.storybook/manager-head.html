@@ -1,0 +1,15 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const originalTitle = document.title;
+    document.title = originalTitle.replace(/Storybook/g, 'ASTRUM AGENCY');
+    
+    const observer = new MutationObserver(function() {
+      const currentTitle = document.title;
+      if (!currentTitle.includes('ASTRUM AGENCY') && currentTitle.includes('Storybook')) {
+        document.title = currentTitle.replace(/Storybook/g, 'ASTRUM AGENCY');
+      }
+    });
+    
+    observer.observe(document.querySelector('title'), { childList: true, subtree: true });
+  });
+</script>

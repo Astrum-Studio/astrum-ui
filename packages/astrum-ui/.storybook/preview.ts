@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react-vite";
 // @ts-ignore
 import { create } from "storybook/theming";
+import "./preview.css";
 import "../src/styles.css";
 
 const docsTheme = create({
@@ -15,6 +16,7 @@ const docsTheme = create({
   inputBg: "#2A2A2A",
   inputBorder: "#3A3A3A",
   inputTextColor: "#E0E0E0",
+  fontBase: '"Involve", sans-serif',
 });
 
 const preview: Preview = {
@@ -38,6 +40,11 @@ const preview: Preview = {
           value: "#1E1E1E",
         },
       ],
+    },
+  },
+  initialGlobals: {
+    backgrounds: {
+      value: "dark",
     },
   },
 };

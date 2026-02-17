@@ -1,0 +1,7 @@
+body,
+#storybook-root,
+#storybook-root *,
+.sb-story,
+.sb-story * {
+  font-family: "Involve", sans-serif !important;
+}
