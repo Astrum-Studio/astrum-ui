@@ -20,7 +20,7 @@
   "scripts": {
     "build": "tsup && copyfiles \"src/**/*.css\" dist -u 1",
     "clean": "rimraf dist",
-    "storybook": "npx storybook dev -p 6006",
+    "storybook": "npx storybook dev -p 3333 --host 0.0.0.0",
     "storybook:build": "npx storybook build -o storybook-static"
   },
   "peerDependencies": {
@@ -45,5 +45,9 @@
     "typescript": "^5.3.3",
     "vite": "^5.4.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Astrum-Studio/astrum-ui.git"
+  }
 }
