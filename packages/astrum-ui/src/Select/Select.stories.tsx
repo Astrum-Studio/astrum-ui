@@ -14,14 +14,25 @@ const manyOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => ({
   label: `Вариант ${i + 1}`,
 }));
 
+const optionsWithSecondary: SelectOption[] = [
+  { value: "1", label: "Зерно пшеницы", secondaryLabel: "01.11.10.000-00000002" },
+  { value: "2", label: "Зерно ячменя", secondaryLabel: "01.11.10.000-00000003" },
+  { value: "3", label: "Зерно ржи", secondaryLabel: "01.11.10.000-00000004" },
+  { value: "4", label: "Зерно овса", secondaryLabel: "01.11.10.000-00000005" },
+];
+
 const meta = {
   component: Select,
   tags: ["autodocs"],
-  argTypes: {
-    size: {
-      options: ["s", "m", "l"],
-      control: { type: "radio" },
+  parameters: {
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 600,
+      },
     },
+  },
+  argTypes: {
     disabled: {
       control: "boolean",
     },
@@ -48,7 +59,6 @@ const meta = {
     label: "Ваше имя",
     placeholder: "Выберите вариант",
     options,
-    size: "m",
   },
 } satisfies Meta<typeof Select>;
 
@@ -64,30 +74,11 @@ export const Default: Story = {
   },
 };
 
-export const WithValue: Story = {
-  args: {
-    label: "Ваше имя",
-    placeholder: "Выберите вариант",
-    options,
-    defaultValue: "2",
-  },
-};
-
 export const WithError: Story = {
   args: {
     label: "Ваше имя",
     placeholder: "Выберите вариант",
     options,
-    error: "Поле обязательно для заполнения",
-  },
-};
-
-export const WithErrorSelected: Story = {
-  args: {
-    label: "Ваше имя",
-    placeholder: "Выберите вариант",
-    options,
-    defaultValue: "2",
     error: "Поле обязательно для заполнения",
   },
 };
@@ -110,21 +101,6 @@ export const Required: Story = {
   },
 };
 
-export const Controlled: Story = {
-  render: function ControlledRender() {
-    const [value, setValue] = useState<string>("");
-    return (
-      <Select
-        label="Ваше имя"
-        placeholder="Выберите вариант"
-        options={options}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-    );
-  },
-};
-
 export const WithDisabledOption: Story = {
   args: {
     label: "Ваше имя",
@@ -138,20 +114,11 @@ export const WithDisabledOption: Story = {
   },
 };
 
-export const ManyOptions: Story = {
+export const TwoLineOptions: Story = {
   args: {
-    label: "Выберите вариант",
-    placeholder: "Выберите из списка",
-    options: manyOptions,
+    label: "Номенклатура",
+    placeholder: "Выберите номенклатуру",
+    options: optionsWithSecondary,
   },
 };
 
-export const Sizes: Story = {
-  render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 320 }}>
-      <Select label="Размер S" placeholder="Placeholder" options={options} size="s" />
-      <Select label="Размер M" placeholder="Placeholder" options={options} size="m" />
-      <Select label="Размер L" placeholder="Placeholder" options={options} size="l" />
-    </div>
-  ),
-};

@@ -47,27 +47,10 @@ export const Default: Story = {
   },
 };
 
-export const Filled: Story = {
-  args: {
-    label: "Ваше имя",
-    placeholder: "Введите ваше имя",
-    defaultValue: "Иван",
-  },
-};
-
 export const WithError: Story = {
   args: {
     label: "Ваше имя",
     placeholder: "Введите ваше имя",
-    error: "Поле обязательно для заполнения",
-  },
-};
-
-export const WithErrorFilled: Story = {
-  args: {
-    label: "Ваше имя",
-    placeholder: "Введите ваше имя",
-    defaultValue: "Иван",
     error: "Поле обязательно для заполнения",
   },
 };
@@ -85,20 +68,6 @@ export const Required: Story = {
     label: "Ваше имя",
     placeholder: "Введите ваше имя",
     required: true,
-  },
-};
-
-export const Controlled: Story = {
-  render: function ControlledRender() {
-    const [value, setValue] = useState("");
-    return (
-      <Input
-        label="Ваше имя"
-        placeholder="Введите ваше имя"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-    );
   },
 };
 
@@ -131,7 +100,7 @@ export const Search: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 320 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 301 }}>
       <Input label="Компактный" placeholder="Размер S" size="s" />
       <Input label="Стандартный" placeholder="Размер M" size="m" />
     </div>

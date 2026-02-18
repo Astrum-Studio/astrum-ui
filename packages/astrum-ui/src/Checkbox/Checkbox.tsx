@@ -22,7 +22,6 @@ export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type" | "onChange"> {
   checked?: boolean;
   indeterminate?: boolean;
-  size?: "s" | "m";
   onChange?: (checked: boolean) => void;
   className?: string;
 }
@@ -32,7 +31,6 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     {
       checked: checkedProp,
       indeterminate = false,
-      size = "m",
       disabled = false,
       onChange,
       className = "",
@@ -77,7 +75,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         htmlFor={inputId}
         className={[
           "astrum-checkbox",
-          size === "s" ? "astrum-checkbox--s" : "astrum-checkbox--m",
+          "astrum-checkbox--m",
           isChecked ? "astrum-checkbox--checked" : "",
           indeterminate ? "astrum-checkbox--indeterminate" : "",
           disabled ? "astrum-checkbox--disabled" : "",

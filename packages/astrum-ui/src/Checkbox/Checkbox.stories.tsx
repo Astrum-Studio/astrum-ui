@@ -6,10 +6,6 @@ const meta = {
   component: Checkbox,
   tags: ["autodocs"],
   argTypes: {
-    size: {
-      options: ["s", "m"],
-      control: { type: "radio" },
-    },
     disabled: {
       control: "boolean",
     },
@@ -19,9 +15,6 @@ const meta = {
     checked: {
       control: "boolean",
     },
-  },
-  args: {
-    size: "m",
   },
 } satisfies Meta<typeof Checkbox>;
 
@@ -54,11 +47,3 @@ export const AllStates: Story = {
   ),
 };
 
-export const Sizes: Story = {
-  render: () => (
-    <div style={rowStyle}>
-      <Checkbox size="s" />
-      <Checkbox size="m" checked />
-    </div>
-  ),
-};

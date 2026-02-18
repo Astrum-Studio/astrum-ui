@@ -35,10 +35,6 @@
   box-shadow: 0 0 0 2px rgba(38, 83, 242, 0.1);
 }
 
-.astrum-input-code--error .astrum-input-code__wrap {
-  border-color: var(--astrum-input-code-error);
-}
-
 .astrum-input-code__cell {
   width: 18px;
   height: 36px;
@@ -83,10 +79,10 @@
 }
 
 .astrum-input-code__footer {
-  margin-top: 8px;
-  padding: 8px 12px;
-  border-radius: 4px;
-  background-color: var(--astrum-input-code-error-bg);
+  margin-top: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba(195, 63, 65, 0.10);
 }
 
 .astrum-input-code__error {

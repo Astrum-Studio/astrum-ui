@@ -86,23 +86,6 @@
   background-color: var(--astrum-primary-white);
 }
 
-.astrum-checkbox--s .astrum-checkbox__box {
-  width: 16px;
-  min-width: 16px;
-  height: 16px;
-  padding: 4px;
-  box-sizing: border-box;
-}
-
-.astrum-checkbox--s .astrum-checkbox__icon {
-  width: 10px;
-  height: 10px;
-}
-
-.astrum-checkbox--s .astrum-checkbox__icon svg {
-  transform: scale(0.85);
-}
-
 .astrum-checkbox--m .astrum-checkbox__box {
   width: 20px;
   min-width: 20px;

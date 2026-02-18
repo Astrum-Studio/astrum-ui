@@ -35,15 +35,6 @@
   border-color: var(--astrum-input-primary);
 }
 
-.astrum-input--error .astrum-input__wrap {
-  border-color: var(--astrum-input-error);
-}
-
-.astrum-input--error .astrum-input__wrap:focus-within {
-  outline-color: var(--astrum-input-error);
-  border-color: var(--astrum-input-error);
-}
-
 .astrum-input__label {
   display: block;
   margin-bottom: 8px;
@@ -167,7 +158,7 @@
 .astrum-input__field {
   box-sizing: border-box;
   flex: 1;
-  min-width: 0;
+  min-width: 301px;
   width: 100%;
   height: 54px;
   padding: 16px 8px 16px 24px;
@@ -217,14 +208,12 @@
 
 .astrum-input__error {
   display: block;
-  margin-top: 8px;
+  margin-top: 4px;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.4;
   color: var(--astrum-input-error);
-}
-
-.astrum-input--s .astrum-input__error {
-  margin-top: 6px;
-  font-size: 11px;
+  border-radius: 8px;
+  background: rgba(195, 63, 65, 0.10);
+  padding: 4px 8px;
 }

@@ -38,28 +38,9 @@ export const WithError: Story = {
   },
 };
 
-export const PartiallyFilled: Story = {
-  args: {
-    defaultValue: "214",
-  },
-};
-
 export const Disabled: Story = {
   args: {
     disabled: true,
     defaultValue: "123456",
-  },
-};
-
-export const Controlled: Story = {
-  render: function ControlledRender() {
-    const [value, setValue] = useState("");
-    return (
-      <InputCode
-        value={value}
-        onChange={setValue}
-        onComplete={(v) => console.log("Complete:", v)}
-      />
-    );
   },
 };

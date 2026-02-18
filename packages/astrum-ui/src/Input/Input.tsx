@@ -110,36 +110,27 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const handleClear = React.useCallback(
       (e: React.MouseEvent) => {
         e.stopPropagation();
-        if (inputRef.current) {
-          if (isControlled && onChange) {
+        if (!inputRef.current) return;
+        inputRef.current.value = "";
+        if (isControlled && onChange) {
+          const syntheticEvent = {
+            ...e,
+            target: inputRef.current,
+            currentTarget: inputRef.current,
+          } as React.ChangeEvent<HTMLInputElement>;
+          onChange(syntheticEvent);
+        } else {
+          setInternalValue("");
+          if (onChange) {
             const syntheticEvent = {
               ...e,
               target: inputRef.current,
               currentTarget: inputRef.current,
             } as React.ChangeEvent<HTMLInputElement>;
-            Object.defineProperty(syntheticEvent.target, "value", {
-              writable: true,
-              value: "",
-            });
             onChange(syntheticEvent);
-          } else {
-            setInternalValue("");
-            inputRef.current.value = "";
-            if (onChange) {
-              const syntheticEvent = {
-                ...e,
-                target: inputRef.current,
-                currentTarget: inputRef.current,
-              } as React.ChangeEvent<HTMLInputElement>;
-              Object.defineProperty(syntheticEvent.target, "value", {
-                writable: true,
-                value: "",
-              });
-              onChange(syntheticEvent);
-            }
           }
-          inputRef.current.focus();
         }
+        inputRef.current.focus();
       },
       [onChange, isControlled]
     );

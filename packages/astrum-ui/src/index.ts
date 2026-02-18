@@ -20,3 +20,5 @@ export { FileUpload, FileItem } from "./FileUpload";
 export type { FileUploadProps, FileItemProps } from "./FileUpload";
 export { Avatar } from "./Avatar";
 export type { AvatarProps } from "./Avatar";
+export { DatePicker } from "./DatePicker";
+export type { DatePickerProps } from "./DatePicker";

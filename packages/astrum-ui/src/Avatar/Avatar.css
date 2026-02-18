@@ -3,6 +3,7 @@
   --astrum-avatar-icon: #ababab;
   --astrum-avatar-overlay: rgba(0, 0, 0, 0.4);
   --astrum-avatar-edit-icon: #ffffff;
+  --astrum-avatar-remove-icon: #EA3B3D;
 
   position: relative;
   cursor: pointer;
@@ -126,9 +127,9 @@
   position: absolute;
   top: -2px;
   right: -2px;
-  width: 20px;
-  height: 20px;
-  background: var(--astrum-avatar-edit-icon);
+  width: 16px;
+  height: 16px;
+  background: var(--astrum-avatar-remove-icon);
   border-radius: 50%;
   border: none;
   display: flex;

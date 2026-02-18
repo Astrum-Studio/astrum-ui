@@ -1,20 +1,15 @@
 import * as React from "react";
 
 const ChevronDownIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
-    <path
-      d="M5 7.5l5 5 5-5"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M6 9L12 15L18 9" stroke="#5988FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
 );
 
 export interface SelectOption {
   value: string;
   label: React.ReactNode;
+  secondaryLabel?: React.ReactNode;
   disabled?: boolean;
 }
 
@@ -24,7 +19,6 @@ export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
   required?: boolean;
   options: SelectOption[];
   placeholder?: string;
-  size?: "s" | "m" | "l";
   className?: string;
 }
 
@@ -36,7 +30,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       required,
       options,
       placeholder,
-      size = "m",
       className = "",
       id: idProp,
       value,
@@ -50,6 +43,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const id = React.useId();
     const selectId = idProp ?? id;
     const [isOpen, setIsOpen] = React.useState(false);
+    const [internalValue, setInternalValue] = React.useState(defaultValue ?? "");
     const selectRef = React.useRef<HTMLSelectElement | null>(null);
     const dropdownRef = React.useRef<HTMLDivElement | null>(null);
     const containerRef = React.useRef<HTMLDivElement | null>(null);
@@ -63,9 +57,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       [ref]
     );
 
-    const currentValue = value !== undefined ? value : defaultValue ?? "";
+    const currentValue = value !== undefined ? value : internalValue;
     const selectedOption = currentValue ? options.find((opt) => opt.value === currentValue) : null;
     const displayValue = selectedOption ? selectedOption.label : placeholder ?? "";
+
+    React.useEffect(() => {
+      if (value === undefined) setInternalValue(defaultValue ?? "");
+    }, [value, defaultValue]);
 
     React.useEffect(() => {
       const handleClickOutside = (e: MouseEvent) => {
@@ -87,6 +85,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     const handleOptionClick = (optionValue: string) => {
       if (selectRef.current) {
+        if (value === undefined) setInternalValue(optionValue);
         const nativeEvent = new Event("change", { bubbles: true });
         Object.defineProperty(nativeEvent, "target", {
           writable: false,
@@ -117,10 +116,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     };
 
     return (
-      <>
+      <div ref={containerRef} className="astrum-select__container">
         <div
-          ref={containerRef}
-          className={`astrum-select ${size === "s" ? "astrum-select--s" : size === "l" ? "astrum-select--l" : "astrum-select--m"} ${error ? "astrum-select--error" : ""} ${isOpen ? "astrum-select--open" : ""} ${className}`.trim()}
+          className={`astrum-select ${error ? "astrum-select--error" : ""} ${isOpen ? "astrum-select--open" : ""} ${className}`.trim()}
         >
           {label != null && (
             <label htmlFor={selectId} className="astrum-select__label">
@@ -136,6 +134,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               value={value !== undefined ? value : undefined}
               defaultValue={value === undefined ? defaultValue : undefined}
               onChange={(e) => {
+                if (value === undefined) setInternalValue(e.target.value);
                 onChange?.(e);
                 setIsOpen(false);
               }}
@@ -199,16 +198,19 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
                 type="button"
                 role="option"
                 aria-selected={option.value === currentValue}
-                className={`astrum-select__option ${option.value === currentValue ? "astrum-select__option--selected" : ""} ${option.disabled ? "astrum-select__option--disabled" : ""}`}
+                className={`astrum-select__option ${option.value === currentValue ? "astrum-select__option--selected" : ""} ${option.disabled ? "astrum-select__option--disabled" : ""} ${option.secondaryLabel != null ? "astrum-select__option--two-line" : ""}`}
                 onClick={() => !option.disabled && handleOptionClick(option.value)}
                 disabled={option.disabled}
               >
-                {option.label}
+                <span className="astrum-select__option-label">{option.label}</span>
+                {option.secondaryLabel != null && (
+                  <span className="astrum-select__option-caption">{option.secondaryLabel}</span>
+                )}
               </button>
             ))}
           </div>
         )}
-      </>
+      </div>
     );
   }
 );

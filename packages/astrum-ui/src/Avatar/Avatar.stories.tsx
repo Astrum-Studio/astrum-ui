@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Avatar } from "./Avatar";
 
+const defaultAvatarSrc = "/avatar.png";
+
 const meta = {
   component: Avatar,
   tags: ["autodocs"],
@@ -15,7 +17,7 @@ const meta = {
   },
   args: {
     size: 56,
-    src: "https://placehold.co/128",
+    src: defaultAvatarSrc,
     alt: "User",
     onUpload: (file: File) => console.log("Upload:", file.name),
     onRemove: () => console.log("Remove"),
@@ -36,7 +38,7 @@ const gridStyle: React.CSSProperties = {
 
 export const Default: Story = {
   render: function DefaultRender(args) {
-    const [img, setImg] = useState<string | null>(args.src ?? "https://placehold.co/128");
+    const [img, setImg] = useState<string | null>(args.src ?? defaultAvatarSrc);
     return (
       <Avatar
         {...args}
@@ -54,7 +56,7 @@ export const Default: Story = {
 
 export const AllStates: Story = {
   render: () => { 
-    const [img, setImg] = useState<string | null>("https://placehold.co/128");
+    const [img, setImg] = useState<string | null>(defaultAvatarSrc);
 
     return (
       <div style={gridStyle}>
@@ -86,7 +88,7 @@ export const AllStates: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: "flex", gap: 24, alignItems: "flex-end" }}>
+    <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
       <Avatar size={56} onUpload={() => {}} onRemove={() => {}} />
       <Avatar size={64} onUpload={() => {}} onRemove={() => {}} />
       <Avatar size={80} onUpload={() => {}} onRemove={() => {}} />

@@ -31,8 +31,8 @@ const meta = {
   },
   args: {
     size: "large",
-    label: "Выберите файлы",
-    description: "Перетащите файлы сюда или выберите их, щелкнув мышью.",
+    label: "Выберите PDF-файлы",
+    description: "Перетащите PDF-файлы сюда или выберите их, щелкнув мышью.",
     buttonText: "Выберите файлы",
   },
 } satisfies Meta<typeof FileUpload>;
@@ -48,39 +48,55 @@ const containerStyle: React.CSSProperties = {
   maxWidth: 600,
 };
 
-export const Large: Story = {
-  args: {
-    size: "large",
-    label: "Выберите PDF-файлы",
-    description: "Перетащите PDF-файлы сюда или выберите их, щелкнув мышью.",
-    buttonText: "Выберите файлы",
-  },
-};
+function renderWithFileList(args: React.ComponentProps<typeof FileUpload>) {
+  const [files, setFiles] = useState<File[]>([]);
 
-export const LargePDF: Story = {
-  args: {
-    size: "large",
-    accept: ".pdf",
-    label: "Выберите PDF-файлы",
-    description: "Перетащите PDF-файлы сюда или выберите их, щелкнув мышью.",
-    buttonText: "Выберите файлы",
-  },
+  return (
+    <div style={containerStyle}>
+      <FileUpload
+        {...args}
+        onChange={(fileList) => {
+          if (fileList) {
+            setFiles((prev) => [...prev, ...Array.from(fileList)]);
+          }
+        }}
+      />
+      {files.length > 0 && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {files.map((file, index) => (
+            <FileItem
+              key={`${file.name}-${index}`}
+              name={file.name}
+              size={file.size}
+              file={file}
+              onRemove={() => {
+                setFiles((prev) => prev.filter((_, i) => i !== index));
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export const Default: Story = {
+  render: (args) => renderWithFileList(args),
 };
 
 export const LargeDisabled: Story = {
   args: {
     size: "large",
     disabled: true,
-    label: "Выберите PDF-файлы",
-    description: "Перетащите PDF-файлы сюда или выберите их, щелкнув мышью.",
-    buttonText: "Выберите файлы",
   },
+  render: (args) => renderWithFileList(args),
 };
 
 export const Compact: Story = {
   args: {
     size: "compact",
   },
+  render: (args) => renderWithFileList(args),
 };
 
 export const CompactDisabled: Story = {
@@ -88,99 +104,28 @@ export const CompactDisabled: Story = {
     size: "compact",
     disabled: true,
   },
-};
-
-export const WithFileItem: Story = {
-  render: function WithFileItemRender() {
-    const [files, setFiles] = useState<File[]>([]);
-
-    return (
-      <div style={containerStyle}>
-        <FileUpload
-          size="large"
-          accept=".png,.jpg,.jpeg"
-          multiple
-          onChange={(fileList) => {
-            if (fileList) {
-              setFiles(Array.from(fileList));
-            }
-          }}
-        />
-        {files.length > 0 && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {files.map((file, index) => (
-              <FileItem
-                key={index}
-                name={file.name}
-                size={file.size}
-                onRemove={() => {
-                  setFiles(files.filter((_, i) => i !== index));
-                }}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  },
+  render: (args) => renderWithFileList(args),
 };
 
 export const FileItemExample: Story = {
   render: () => (
     <div style={containerStyle}>
-      <FileItem name="Logo.png" size="20 KB" />
+      <FileItem
+        name="Logo.png"
+        size="20 KB"
+        previewUrl="/avatar.png"
+        onRemove={() => {}}
+      />
       <FileItem
         name="Document.pdf"
         size={1024 * 150}
-        onRemove={() => console.log("removed")}
+        onRemove={() => {}}
       />
-      <FileItem name="Image.jpg" size="2.5 MB" />
-    </div>
-  ),
-};
-
-export const Interactive: Story = {
-  render: function InteractiveRender() {
-    const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-
-    return (
-      <div style={containerStyle}>
-        <FileUpload
-          size="large"
-          multiple
-          onChange={(fileList) => {
-            if (fileList) {
-              setUploadedFiles((prev) => [...prev, ...Array.from(fileList)]);
-            }
-          }}
-        />
-        {uploadedFiles.length > 0 && (
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            <h3 style={{ margin: 0, fontSize: "14px", fontWeight: 700 }}>
-              Загруженные файлы ({uploadedFiles.length})
-            </h3>
-            {uploadedFiles.map((file, index) => (
-              <FileItem
-                key={index}
-                name={file.name}
-                size={file.size}
-                onRemove={() => {
-                  setUploadedFiles(uploadedFiles.filter((_, i) => i !== index));
-                }}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  },
-};
-
-export const BothSizes: Story = {
-  render: () => (
-    <div style={containerStyle}>
-      <FileUpload size="large" label="Большой вариант" />
-      <FileUpload size="compact" />
+      <FileItem
+        name="Image.jpg"
+        size="2.5 MB"
+        onRemove={() => {}}
+      />
     </div>
   ),
 };
