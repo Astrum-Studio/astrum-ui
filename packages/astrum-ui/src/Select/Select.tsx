@@ -14,7 +14,6 @@ export interface SelectOption {
 }
 
 export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "size"> {
-  label?: React.ReactNode;
   error?: string;
   required?: boolean;
   options: SelectOption[];
@@ -25,7 +24,6 @@ export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
-      label,
       error,
       required,
       options,
@@ -120,12 +118,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         <div
           className={`astrum-select ${error ? "astrum-select--error" : ""} ${isOpen ? "astrum-select--open" : ""} ${className}`.trim()}
         >
-          {label != null && (
-            <label htmlFor={selectId} className="astrum-select__label">
-              {label}
-              {required && <span className="astrum-select__required" aria-hidden>*</span>}
-            </label>
-          )}
           <div className="astrum-select__wrap">
             <select
               ref={setRef}

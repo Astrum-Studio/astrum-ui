@@ -17,35 +17,6 @@
   min-width: 0;
 }
 
-.astrum-datepicker__label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.2;
-  color: var(--astrum-datepicker-text);
-  cursor: pointer;
-}
-
-.astrum-datepicker__required {
-  color: var(--astrum-datepicker-error);
-  margin-left: 2px;
-}
-
-.astrum-datepicker__range-inputs {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.astrum-datepicker__range-separator {
-  flex-shrink: 0;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--astrum-datepicker-text);
-}
 
 .astrum-datepicker__wrap {
   position: relative;
@@ -58,9 +29,6 @@
   flex: 1;
 }
 
-.astrum-datepicker--range .astrum-datepicker__wrap {
-  flex: 1;
-}
 
 @media (hover: hover) {
   .astrum-datepicker__wrap:hover:not(:has(.astrum-datepicker__field:disabled)) {
@@ -108,10 +76,6 @@
   cursor: not-allowed;
 }
 
-.astrum-datepicker--range .astrum-datepicker__icon {
-  position: relative;
-  flex-shrink: 0;
-}
 
 .astrum-datepicker__icon {
   position: absolute;
@@ -121,35 +85,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   padding: 0;
   margin: 0;
   border: none;
   background: transparent;
   cursor: pointer;
-  transition: background-color 0.15s;
-  border-radius: 4px;
-}
-
-.astrum-datepicker__icon:hover:not(:disabled) {
-  background-color: var(--astrum-datepicker-gray-5);
-}
-
-.astrum-datepicker__icon--active {
-  background-color: var(--astrum-datepicker-primary);
-}
-
-.astrum-datepicker__icon--active:hover:not(:disabled) {
-  background-color: #1a42d0;
 }
 
 .astrum-datepicker__icon:disabled {
   cursor: not-allowed;
-}
-
-.astrum-datepicker__icon--active svg path {
-  stroke: #FFFFFF;
 }
 
 .astrum-datepicker__error {
@@ -165,10 +111,11 @@
 }
 
 .astrum-datepicker__calendar {
+  box-sizing: border-box;
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
-  width: 100%;
+  min-width: 256px;
   z-index: 1000;
   background: var(--astrum-datepicker-bg);
   border: 1px solid var(--astrum-datepicker-border);
@@ -177,7 +124,7 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 4px;
 }
 
 .astrum-datepicker__calendar-header {
@@ -215,7 +162,7 @@
   flex: 1;
   text-align: center;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--astrum-datepicker-text);
 }
@@ -223,16 +170,19 @@
 .astrum-datepicker__calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+  gap: 0;
+  border-bottom: 1px solid var(--astrum-datepicker-border);
+  margin-bottom: 4px;
 }
 
 .astrum-datepicker__calendar-weekday {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
+  height: 28px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 10px;
   line-height: 1.4;
   color: var(--astrum-datepicker-gray-40);
 }
@@ -240,7 +190,7 @@
 .astrum-datepicker__calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+  gap: 0;
 }
 
 .astrum-datepicker__calendar-day {
@@ -248,15 +198,13 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  aspect-ratio: 1;
-  min-height: 32px;
+  height: 32px;
   padding: 0;
   margin: 0;
   border: none;
   background: transparent;
-  font-family: inherit;
-  font-weight: 400;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 12px;
   line-height: 1.4;
   color: var(--astrum-datepicker-text);
   cursor: pointer;
@@ -269,16 +217,15 @@
 }
 
 .astrum-datepicker__calendar-day--other-month {
-  color: var(--astrum-datepicker-gray-40);
-}
-
-.astrum-datepicker__calendar-day--today {
-  border: 1px solid var(--astrum-datepicker-primary);
+  opacity: 0.5;
 }
 
 .astrum-datepicker__calendar-day--selected {
   background-color: var(--astrum-datepicker-primary);
   color: #FFFFFF;
+  border-radius: 4px;
+  z-index: 1;
+  position: relative;
 }
 
 .astrum-datepicker__calendar-day--selected:hover:not(:disabled) {
@@ -286,11 +233,21 @@
 }
 
 .astrum-datepicker__calendar-day--in-range {
-  background-color: rgba(38, 83, 242, 0.1);
+  position: relative;
 }
 
-.astrum-datepicker__calendar-day--in-range:hover:not(:disabled) {
-  background-color: rgba(38, 83, 242, 0.2);
+.astrum-datepicker__calendar-day--in-range:before {
+  content: "";
+  position: absolute;
+  background-color: #F4F4F4;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: 0;
+  width: 100%;
+  height: calc(100% - 4px);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .astrum-datepicker__calendar-day--range-start {
@@ -311,9 +268,9 @@
 .astrum-datepicker__calendar-time {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  padding-top: 16px;
-  border-top: 1px solid var(--astrum-datepicker-border);
+  margin-top: 12px;
 }
 
 .astrum-datepicker__calendar-time-label {
@@ -326,18 +283,20 @@
 
 .astrum-datepicker__calendar-time-input-wrap {
   position: relative;
-  flex: 1;
   display: flex;
   align-items: center;
+  max-width: 100px;
 }
 
 .astrum-datepicker__calendar-time-input {
+  box-sizing: border-box;
   flex: 1;
   min-width: 0;
-  height: 40px;
+  height: 37px;
   border: 1px solid var(--astrum-datepicker-border);
   border-radius: 8px;
   background: var(--astrum-datepicker-bg);
+  padding: 8px 36px 8px 12px;
   font-family: inherit;
   font-weight: 400;
   font-size: 14px;

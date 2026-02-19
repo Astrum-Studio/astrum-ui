@@ -18,19 +18,6 @@
   min-width: 361px;
 }
 
-.astrum-select__label {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--astrum-gray-80);
-  cursor: pointer;
-}
-
-.astrum-select__required {
-  color: var(--astrum-error);
-  margin-left: 2px;
-}
-
 .astrum-select__wrap {
   position: relative;
   display: flex;

@@ -42,9 +42,6 @@ const meta = {
     multiple: {
       control: "boolean",
     },
-    label: {
-      control: "text",
-    },
     placeholder: {
       control: "text",
     },
@@ -56,7 +53,6 @@ const meta = {
     },
   },
   args: {
-    label: "Ваше имя",
     placeholder: "Выберите вариант",
     options,
   },
@@ -68,7 +64,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: "Ваше имя",
     placeholder: "Выберите вариант",
     options,
   },
@@ -76,7 +71,6 @@ export const Default: Story = {
 
 export const WithError: Story = {
   args: {
-    label: "Ваше имя",
     placeholder: "Выберите вариант",
     options,
     error: "Поле обязательно для заполнения",
@@ -85,7 +79,6 @@ export const WithError: Story = {
 
 export const Disabled: Story = {
   args: {
-    label: "Ваше имя",
     placeholder: "Выберите вариант",
     options,
     disabled: true,
@@ -94,7 +87,6 @@ export const Disabled: Story = {
 
 export const Required: Story = {
   args: {
-    label: "Ваше имя",
     placeholder: "Выберите вариант",
     options,
     required: true,
@@ -103,7 +95,6 @@ export const Required: Story = {
 
 export const WithDisabledOption: Story = {
   args: {
-    label: "Ваше имя",
     placeholder: "Выберите вариант",
     options: [
       { value: "1", label: "Вариант 1" },
@@ -116,7 +107,6 @@ export const WithDisabledOption: Story = {
 
 export const TwoLineOptions: Story = {
   args: {
-    label: "Номенклатура",
     placeholder: "Выберите номенклатуру",
     options: optionsWithSecondary,
   },
