@@ -17,8 +17,8 @@ const FileIcon = () => (
 
 const CloseIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M6.00049 6L18.0005 18" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M18.0005 6L6.00049 18" stroke="#818181" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6.00049 6L18.0005 18" stroke="#818181" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M18.0005 6L6.00049 18" stroke="#818181" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
