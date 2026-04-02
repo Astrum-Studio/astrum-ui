@@ -1,0 +1,128 @@
+.astrum-sidebar-item {
+  --astrum-sidebar-primary: #2653f2;
+  --astrum-sidebar-text: #575757;
+  --astrum-sidebar-icon-muted: #ababab;
+  --astrum-sidebar-hover: #f4f4f4;
+  --astrum-sidebar-active-bg: #f8f8f8;
+  --astrum-sidebar-warning: #deaa01;
+  --astrum-sidebar-focus-ring: rgba(38, 83, 242, 0.4);
+
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--astrum-sidebar-text);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+a.astrum-sidebar-item {
+  display: inline-flex;
+}
+
+.astrum-sidebar-item__lead {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--astrum-sidebar-icon-muted);
+}
+
+.astrum-sidebar-item__lead svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.astrum-sidebar-item__main {
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
+.astrum-sidebar-item__label {
+  flex: 0 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: normal;
+}
+
+.astrum-sidebar-item__end {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--astrum-sidebar-warning);
+}
+
+.astrum-sidebar-item__end svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+/* Padding: с ведущей иконкой — 12px; без — 12px 16px (макет) */
+.astrum-sidebar-item--has-lead {
+  gap: 12px;
+  padding: 12px;
+}
+
+.astrum-sidebar-item:not(.astrum-sidebar-item--has-lead) {
+  padding: 12px 16px;
+}
+
+.astrum-sidebar-item:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--astrum-sidebar-hover);
+}
+
+.astrum-sidebar-item:focus {
+  outline: none;
+}
+
+.astrum-sidebar-item:focus-visible {
+  box-shadow: 0 0 0 3px var(--astrum-sidebar-focus-ring);
+}
+
+.astrum-sidebar-item--active {
+  background-color: var(--astrum-sidebar-active-bg);
+}
+
+.astrum-sidebar-item--active.astrum-sidebar-item--has-lead .astrum-sidebar-item__lead {
+  color: var(--astrum-sidebar-primary);
+}
+
+.astrum-sidebar-item--active:not(.astrum-sidebar-item--has-lead) .astrum-sidebar-item__label {
+  color: var(--astrum-sidebar-primary);
+}
+
+.astrum-sidebar-item:disabled,
+.astrum-sidebar-item[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.astrum-sidebar-item:disabled:hover,
+.astrum-sidebar-item[aria-disabled="true"]:hover {
+  background-color: transparent;
+}

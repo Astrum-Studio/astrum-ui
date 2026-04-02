@@ -22,3 +22,5 @@ export { Avatar } from "./Avatar";
 export type { AvatarProps } from "./Avatar";
 export { DatePicker } from "./DatePicker";
 export type { DatePickerProps } from "./DatePicker";
+export { SidebarItem, SidebarItemSettingsIcon, SidebarItemFlashIcon } from "./SidebarItem";
+export type { SidebarItemProps } from "./SidebarItem";
