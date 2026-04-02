@@ -31,30 +31,30 @@
   justify-content: center;
 }
 
-.astrum-btn-s {
+.astrum-btn:where(.astrum-btn-s) {
   padding: 8px 16px;
   font-size: 14px;
 }
 
-.astrum-btn-m {
+.astrum-btn:where(.astrum-btn-m) {
   padding: 10px 20px;
   font-size: 15px;
 }
 
-.astrum-btn-l {
+.astrum-btn:where(.astrum-btn-l) {
   padding: 12px 24px;
   font-size: 18px;
 }
 
-.astrum-btn-icon-only.astrum-btn-s {
+.astrum-btn.astrum-btn-icon-only:where(.astrum-btn-s) {
   padding: 8px;
 }
 
-.astrum-btn-icon-only.astrum-btn-m {
+.astrum-btn.astrum-btn-icon-only:where(.astrum-btn-m) {
   padding: 10px;
 }
 
-.astrum-btn-icon-only.astrum-btn-l {
+.astrum-btn.astrum-btn-icon-only:where(.astrum-btn-l) {
   padding: 12px;
 }
 
