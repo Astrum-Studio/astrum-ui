@@ -34,7 +34,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       variant = "primary",
-      size = "m",
+      size = "l",
       icon,
       iconPosition = "right",
       shape = "default",
