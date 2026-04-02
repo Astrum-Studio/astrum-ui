@@ -42,6 +42,14 @@ const meta = {
     disabled: {
       control: "boolean",
     },
+    href: {
+      control: "text",
+      description: "Можно не заполнять",
+    },
+    as: {
+      control: false,
+      description: "Например Link из next/link",
+    },
   },
   args: {
     children: "Button",
@@ -61,7 +69,9 @@ const sizesRowStyle: React.CSSProperties = {
   flexWrap: "wrap",
 };
 
-export const Default: Story = {};
+export const Default: Story = {
+  render: (args) => <Button {...args} />,
+};
 
 export const Primary: Story = {
   render: () => (
@@ -223,5 +233,26 @@ export const Disabled: Story = {
         Button
       </Button>
     </div>
+  ),
+};
+
+export const AsLink: Story = {
+  render: () => (
+    <div style={{ display: "flex", gap: 16, flexWrap: "wrap", alignItems: "center" }}>
+      <Button href="https://example.com" variant="primary" target="_blank" rel="noopener noreferrer">
+        Ссылка (тег a)
+      </Button>
+      <Button href="#" variant="grey" onClick={(e) => e.preventDefault()}>
+        Как кнопка (preventDefault)
+      </Button>
+    </div>
+  ),
+};
+
+export const LinkDisabled: Story = {
+  render: () => (
+    <Button href="https://example.com" variant="primary" disabled>
+      Отключённая ссылка
+    </Button>
   ),
 };

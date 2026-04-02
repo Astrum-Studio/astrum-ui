@@ -21,7 +21,12 @@
   transition: all ease-in-out 0.15s;
 }
 
-.astrum-btn:disabled {
+a.astrum-btn {
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.astrum-btn:is(:disabled, [aria-disabled="true"]) {
   cursor: not-allowed;
 }
 
@@ -71,12 +76,12 @@
   color: var(--astrum-primary-white);
 }
 
-.astrum-btn-primary:hover:not(:disabled) {
+.astrum-btn-primary:hover:not(:disabled):not([aria-disabled="true"]) {
   background-color: var(--astrum-hover-blue);
   color: var(--astrum-primary-white);
 }
 
-.astrum-btn-primary:disabled {
+.astrum-btn-primary:is(:disabled, [aria-disabled="true"]) {
   background-color: var(--astrum-gray-20);
   color: var(--astrum-gray-60);
 }
@@ -87,13 +92,13 @@
   border: 1px solid var(--astrum-primary-white);
 }
 
-.astrum-btn-outlined:hover:not(:disabled) {
+.astrum-btn-outlined:hover:not(:disabled):not([aria-disabled="true"]) {
   background-color: var(--astrum-primary-white);
   border-color: var(--astrum-primary-white);
   color: var(--astrum-hover-blue);
 }
 
-.astrum-btn-outlined:disabled {
+.astrum-btn-outlined:is(:disabled, [aria-disabled="true"]) {
   background-color: transparent;
   border-color: transparent;
   color: var(--astrum-primary-white);
@@ -106,13 +111,13 @@
   border: 1px dashed var(--astrum-gray-60);
 }
 
-.astrum-btn-dashed:hover:not(:disabled) {
+.astrum-btn-dashed:hover:not(:disabled):not([aria-disabled="true"]) {
   background-color: transparent;
   border-color: var(--astrum-gray-80);
   color: var(--astrum-gray-80);
 }
 
-.astrum-btn-dashed:disabled {
+.astrum-btn-dashed:is(:disabled, [aria-disabled="true"]) {
   background-color: transparent;
   border-color: transparent;
   color: transparent;
@@ -124,14 +129,14 @@
   color: var(--astrum-primary);
 }
 
-.astrum-btn-grey:hover:not(:disabled) {
+.astrum-btn-grey:hover:not(:disabled):not([aria-disabled="true"]) {
   outline-width: 2px;
   outline-color: var(--astrum-primary);
   background-color: var(--astrum-gray-5);
   color: var(--astrum-primary);
 }
 
-.astrum-btn-grey:disabled {
+.astrum-btn-grey:is(:disabled, [aria-disabled="true"]) {
   background-color: var(--astrum-gray-20);
   color: var(--astrum-gray-60);
 }
@@ -142,14 +147,14 @@
   color: var(--astrum-primary);
 }
 
-.astrum-btn-white:hover:not(:disabled) {
+.astrum-btn-white:hover:not(:disabled):not([aria-disabled="true"]) {
   outline-width: 2px;
   outline-color: var(--astrum-primary);
   background-color: var(--astrum-primary-white);
   color: var(--astrum-primary);
 }
 
-.astrum-btn-white:disabled {
+.astrum-btn-white:is(:disabled, [aria-disabled="true"]) {
   background-color: var(--astrum-gray-20);
   color: var(--astrum-gray-60);
 }
@@ -159,12 +164,12 @@
   color: var(--astrum-gray-80);
 }
 
-.astrum-btn-ghost:hover:not(:disabled) {
+.astrum-btn-ghost:hover:not(:disabled):not([aria-disabled="true"]) {
   background-color: transparent;
   color: var(--astrum-primary);
 }
 
-.astrum-btn-ghost:disabled {
+.astrum-btn-ghost:is(:disabled, [aria-disabled="true"]) {
   background-color: transparent;
   color: var(--astrum-gray-40);
 }
