@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Select, SelectOption } from "./Select";
 
@@ -8,11 +7,6 @@ const options: SelectOption[] = [
   { value: "3", label: "Вариант 3" },
   { value: "4", label: "Вариант 4" },
 ];
-
-const manyOptions: SelectOption[] = Array.from({ length: 20 }, (_, i) => ({
-  value: String(i + 1),
-  label: `Вариант ${i + 1}`,
-}));
 
 const optionsWithSecondary: SelectOption[] = [
   { value: "1", label: "Зерно пшеницы", secondaryLabel: "01.11.10.000-00000002" },
@@ -46,6 +40,9 @@ const meta = {
       control: "text",
     },
     error: {
+      control: "text",
+    },
+    separator: {
       control: "text",
     },
     options: {
@@ -112,3 +109,10 @@ export const TwoLineOptions: Story = {
   },
 };
 
+export const WithSeparator: Story = {
+  args: {
+    placeholder: "Перенос строки",
+    separator: "Разделитель",
+    options,
+  },
+};

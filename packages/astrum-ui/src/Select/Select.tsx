@@ -19,6 +19,7 @@ export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
   options: SelectOption[];
   placeholder?: string;
   className?: string;
+  separator?: string;
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
@@ -29,6 +30,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       options,
       placeholder,
       className = "",
+      separator,
       id: idProp,
       value,
       defaultValue,
@@ -116,9 +118,10 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div ref={containerRef} className="astrum-select__container">
         <div
-          className={`astrum-select ${error ? "astrum-select--error" : ""} ${isOpen ? "astrum-select--open" : ""} ${className}`.trim()}
+          className={`astrum-select ${error ? "astrum-select--error" : ""} ${isOpen ? "astrum-select--open" : ""} ${separator != null ? "astrum-select--split" : ""} ${className}`.trim()}
         >
           <div className="astrum-select__wrap">
+            {separator != null && <div className="astrum-select__separator">{separator}</div>}
             <select
               ref={setRef}
               id={selectId}
@@ -167,8 +170,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               aria-expanded={isOpen}
             >
               <span className={`astrum-select__value ${!selectedOption && placeholder ? "astrum-select__value--placeholder" : ""}`}>
-              {displayValue}
-            </span>
+                {displayValue}
+              </span>
               <span className={`astrum-select__chevron ${isOpen ? "astrum-select__chevron--open" : ""}`}>
                 <ChevronDownIcon />
               </span>
