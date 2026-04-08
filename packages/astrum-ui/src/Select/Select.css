@@ -117,6 +117,12 @@
   transition: transform 0.2s ease;
 }
 
+.astrum-select__chevron svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
 .astrum-select__chevron--open {
   transform: rotate(180deg);
 }
@@ -242,3 +248,40 @@
   opacity: 0.6;
 }
 
+@media (max-width: 767px) {
+  .astrum-select__container {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .astrum-select {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .astrum-select__separator {
+    padding: 14px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .astrum-select__trigger {
+    padding: 12px 12px 12px 16px;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .astrum-select--split .astrum-select__trigger {
+    padding: 12px 12px 12px 16px;
+  }
+
+  .astrum-select__chevron svg {
+    width: 20px;
+    height: 20px;
+  }
+}
